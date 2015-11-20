@@ -1,3 +1,6 @@
+/*jslint browser: true, devel: true, vars: true, unparam: true, white: true, indent: 2 */
+/*global jQuery */
+
 /*!========================================================================
  * listgroup.js v1.1.2
  * http://rickardn.github.io/listgroup.js
@@ -89,7 +92,7 @@
                 vals.push($(element).val());
             });
             values = vals;
-        } 
+        }
 
         this.$element.val(values)
                      .change();
@@ -118,7 +121,7 @@
 
         $select.find('option').each(function (i, item) {
             var $item = $(item);
-    
+
             var $new = $('<a>')
                         .attr('href', '#')
                         .addClass('list-group-item')
@@ -161,7 +164,7 @@
         return $listGroup;
     };
 
-    
+
     // LIST GROUP PLUGIN DEFINITION
     // =======================
     $.fn.listgroup = function (option) {
