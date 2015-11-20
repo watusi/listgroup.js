@@ -1,4 +1,4 @@
-/*jslint browser: true, devel: true, vars: true, unparam: true, white: true, indent: 2 */
+/*jslint browser: true, devel: true, vars: true, unparam: true, white: true, indent: 4 */
 /*global jQuery */
 
 /*!========================================================================
@@ -27,22 +27,26 @@
         var $element = this.$element;
         var options = this.options;
 
-        if (options.toggle)
+        if (options.toggle) {
             $element.attr('data-toggle', options.toggle);
+        }
 
         $element.on('click', '.list-group-item', function () {
             var $item = $(this);
 
             if (!$item.hasClass('disabled')) {
 
-                if ($element.data('toggle') == 'items')
+                if ($element.data('toggle') === 'items') {
                     $item.toggleClass('active');
-                else
+                }
+                else {
                     me.unselect('*')
                       .select($item);
+                }
 
-                if (options.click)
+                if (options.click) {
                     options.click.apply(this);
+                }
             }
 
             $item.blur();
@@ -51,11 +55,13 @@
     };
 
     ListGroup.prototype.select = function (item) {
-        if (item instanceof $)
+        if (item instanceof $) {
             item.addClass('active');
+        }
 
-        if (typeof item === 'string')
+        if (typeof item === 'string') {
             item = [item];
+        }
 
         if (Array.isArray(item)) {
             for (var i in item) {
@@ -101,8 +107,8 @@
     SelectList.prototype.unselect = function(values) {
         var value = this.$element.val();
 
-        if (!Array.isArray(value)) value = [value];
-        if (!Array.isArray(values)) values = [values];
+        if (!Array.isArray(value)) { value = [value]; }
+        if (!Array.isArray(values))  {values = [values]; }
 
         for (var i in values)
             value.pop(values[i]);
@@ -116,8 +122,9 @@
 
         var $listGroup = $('<ul>').addClass('list-group');
 
-        if ($select.attr('multiple'))
+        if ($select.attr('multiple')) {
             $listGroup.attr('data-toggle', 'items');
+        }
 
         $select.find('option').each(function (i, item) {
             var $item = $(item);
@@ -128,11 +135,13 @@
                         .attr('data-value', $item.val())
                         .text($item.text());
 
-            if ($item.is(':disabled'))
+            if ($item.is(':disabled')) {
                 $new.addClass('disabled');
+            }
 
-            if ($item.css('display') === 'none')
+            if ($item.css('display') === 'none') {
                 $new.addClass('hidden');
+            }
 
             $listGroup.append($new);
         });
@@ -152,7 +161,7 @@
                     var value = $(item).data('value');
                     values.push(value);
                 });
-                if (values.length == 1) values = values[0];
+                if (values.length == 1) { values = values[0]; }
                 $select.val(values);
             }
         });
@@ -172,18 +181,21 @@
             var $element = $(element);
 
             var list = $element.data('listgroup');
-            if (!list)
+            if (!list) {
                 $element.data('listgroup', (list = $element.is('select')
                     ? new SelectList(element, option)
                     : new ListGroup(element, option)));
+            }
 
             if (option) {
 
-                if (option.unselect)
+                if (option.unselect) {
                     list.unselect(option.unselect);
+                }
 
-                if (option.select)
+                if (option.select) {
                     list.select(option.select);
+                }
             }
         });
     };
