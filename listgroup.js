@@ -201,6 +201,6 @@
     };
 
     $(function () {
-        $('.list-group').listgroup();
+        $('.list-group.list-group-enhanced').listgroup();
     });
 }(jQuery);
